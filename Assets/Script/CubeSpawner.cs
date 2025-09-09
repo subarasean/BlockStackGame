@@ -12,15 +12,27 @@ public class CubeSpawner : MonoBehaviour
     public void SpawnCube()
     {
         var cube = Instantiate(cubePrefab);
+
         if (MovingCube.LastCube != null && MovingCube.LastCube.gameObject != GameObject.Find("StartCube"))
-        { 
-            cube.transform.position = new Vector3(transform.position.x, MovingCube.LastCube.transform.position.y + cubePrefab.transform.localScale.y, transform.position.z);
+        {
+            float newY = MovingCube.LastCube.transform.position.y + cubePrefab.transform.localScale.y;
+
+            if (moveDirection == MoveDirection.X)
+            {
+                cube.transform.position = new Vector3(transform.position.x, newY, MovingCube.LastCube.transform.position.z);
+            }
+            else
+            {
+                cube.transform.position = new Vector3(MovingCube.LastCube.transform.position.x, newY, transform.position.z);
+            }
+
+            cube.transform.localScale = new Vector3(MovingCube.LastCube.transform.localScale.x, cubePrefab.transform.localScale.y, MovingCube.LastCube.transform.localScale.z);
         }
         else
         {
             cube.transform.position = transform.position;
+            cube.transform.localScale = cubePrefab.transform.localScale;
         }
-
         cube.MoveDirection = moveDirection; 
     }
 }

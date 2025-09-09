@@ -25,7 +25,6 @@ public class MovingCube : MonoBehaviour
             LastCube = GameObject.Find("StartCube").GetComponent<MovingCube>() ;
         }
 
-
         GetComponent<Renderer>().material.color = GetRandomColor();
 
         transform.localScale = new Vector3(LastCube.transform.localScale.x, transform.localScale.y, LastCube.transform.localScale.z);
@@ -89,6 +88,7 @@ public class MovingCube : MonoBehaviour
         float fallingBlockPosition = cubeEdge + fallingBlockSize / 2f * direction;
 
         SpawnDroppedCube(fallingBlockPosition, fallingBlockSize);
+        UnityEngine.Debug.Log(newXPosition);
     }
 
     private void ZSplit(float cutCube, float direction)
@@ -104,6 +104,7 @@ public class MovingCube : MonoBehaviour
         float fallingBlockPosition = cubeEdge + fallingBlockSize / 2f * direction;
 
         SpawnDroppedCube(fallingBlockPosition, fallingBlockSize);
+        UnityEngine.Debug.Log(newZPosition);
     }
 
     private void SpawnDroppedCube(float fallingBlockPosition, float fallingBlockSize)
